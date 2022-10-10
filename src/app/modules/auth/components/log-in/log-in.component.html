@@ -1,0 +1,46 @@
+<form
+  [formGroup]="form"
+  novalidate
+>
+  <mat-spinner *ngIf="(spinner$ | async)" class="spinner"></mat-spinner>
+
+  <mat-form-field class="full-width">
+    <mat-label>{{ 'field.email' | translate }}</mat-label>
+    <input matInput formControlName="email">
+    <mat-error *ngIf="form.controls.email.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+    <mat-error *ngIf="form.controls.email.hasError('pattern')">{{ 'error.field.email' | translate }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>{{ 'field.password' | translate }}</mat-label>
+    <input matInput formControlName="password">
+    <mat-error *ngIf="form.controls.password.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+  </mat-form-field>
+
+  <div class="inline">
+    <p class="mat-body-1 end">
+      <a [routerLink]="FORGET_PASSWORD_PAGE">{{ 'login.question.forget-password' | translate }}</a>
+    </p>
+  </div>
+
+  <button
+    class="full-width"
+    mat-raised-button
+    color="primary"
+    type="button"
+    [disabled]="(form.invalid) || (spinner$ | async)"
+    (click)="onSubmit()"
+  >
+    {{ 'btn.login' | translate }}
+  </button>
+  <button
+    class="full-width"
+    type="button"
+    mat-button
+    color="primary"
+    [disabled]="(spinner$ | async)"
+    (click)="signUpPage()"
+  >
+    {{ 'btn.sign-up' | translate }}
+  </button>
+</form>

@@ -1,0 +1,68 @@
+$link-color: #000;
+
+form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+
+  .spinner {
+    position: absolute;
+  }
+
+  .inline {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: .15rem auto;
+    width: 100%;
+
+    .end {
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    a {
+      color: $link-color;
+    }
+
+    p {
+      a {
+        color: $link-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  form {
+    .inline {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      p {
+        margin: 1rem auto;
+      }
+    }
+  }
+}
+
+.information {
+  width: 85%;
+  margin: 2rem auto;
+  overflow: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  margin: 10px auto;
+}

@@ -1,0 +1,52 @@
+<form
+  class="example-form"
+  [formGroup]="form"
+  novalidate
+>
+  <mat-spinner *ngIf="spinner$ | async" class="spinner"></mat-spinner>
+  <mat-form-field class="full-width">
+    <mat-label>{{ 'field.name' | translate }}</mat-label>
+    <input matInput formControlName="firstName">
+    <mat-error *ngIf="form.controls.firstName.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>{{ 'field.surname' | translate }}</mat-label>
+    <input matInput formControlName="lastName">
+    <mat-error *ngIf="form.controls.lastName.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>{{ 'field.email' | translate }}</mat-label>
+    <input matInput formControlName="email">
+    <mat-error *ngIf="form.controls.email.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+    <mat-error *ngIf="form.controls.email.hasError('pattern')">{{ 'error.field.email' | translate }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>{{ 'field.password' | translate }}</mat-label>
+    <input matInput formControlName="password">
+    <mat-error *ngIf="form.controls.password.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>{{ 'field.confirm-password' | translate }}</mat-label>
+    <input matInput formControlName="confirm" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="form.controls.confirm.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+    <mat-error
+      *ngIf="form.hasError('mismatch') && !form.controls.confirm.hasError('required')">{{ 'error.field.mismatch' | translate }}</mat-error>
+  </mat-form-field>
+
+  <div class="inline">
+    <section>
+      <mat-checkbox color="primary" formControlName="termsConditions">
+        {{ 'sign-up.agree' | translate }} <a [routerLink]="TERMS_PAGE">{{ 'sign-up.terms-conditions' | translate }}</a>
+      </mat-checkbox>
+    </section>
+    <p class="mat-body-1"><a [routerLink]="LOGIN_PAGE">{{ 'sign-up.question.account-exists' | translate }}</a></p>
+  </div>
+
+  <button mat-raised-button color="primary" type="button" class="full-width" (click)="onSubmit()" [disabled]="(form.invalid) || (spinner$ | async)">
+    {{ 'btn.sign-up' | translate }}
+  </button>
+</form>

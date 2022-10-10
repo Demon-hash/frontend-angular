@@ -1,0 +1,42 @@
+{
+  "chat": {
+    "joined": "{{ credits }} has just joined the chat!"
+  },
+  "login": {
+    "question": {
+      "forget-password": "Forget password"
+    }
+  },
+  "sign-up": {
+    "question": {
+      "account-exists": "Already have an account?"
+    },
+    "agree": "I do agree to",
+    "terms-conditions": "terms and conditions"
+  },
+  "reset-password": {
+    "misc": {
+      "email": "* If the account exists, then the authorization code will be sent to this email"
+    }
+  },
+  "btn": {
+    "login": "Login",
+    "sign-up": "Sign Up",
+    "reset-password": "Reset password",
+    "back": "Back"
+  },
+  "field": {
+    "name": "First name",
+    "surname": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "confirm-password": "Confirm password"
+  },
+  "error": {
+    "field": {
+      "required": "This field is required",
+      "email": "Invalid email format",
+      "mismatch": "Fields are mismatch"
+    }
+  }
+}
