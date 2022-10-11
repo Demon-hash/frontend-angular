@@ -1,22 +1,40 @@
-<p *ngFor="let i of (messages$ | async)" class="mat-body-1 message">
-  <span>
-    {{ i }}
-  </span>
-</p>
-<form
-  [formGroup]="form"
-  novalidate
->
-  <mat-form-field class="full-width">
-    <input matInput formControlName="message">
-  </mat-form-field>
+<div class="container">
+  <div class="nav-group">
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="button"
-    (click)="send()"
-  >
-    Send
-  </button>
-</form>
+  </div>
+  <div class="nav-messages">
+    <div *ngFor="let i of (messages$ | async)" class="mat-body-1 message">
+      <div class="message-body">
+        <div class="user-ico">
+          <img src="/assets/images/user-test.jpg" alt="*" draggable="false">
+        </div>
+        <div class="message-data">
+          <span class="credits">
+            <span class="message-sender mat-body-2">{{ this.user?.value?.firstName }} {{ this.user?.value?.lastName }} at 22:06</span>
+          </span>
+          <textarea autosize class="message-raw mat-body-1" readonly>{{ i }}</textarea>
+        </div>
+      </div>
+    </div>
+    <form
+      [formGroup]="form"
+      novalidate
+    >
+      <mat-form-field class="full-width" appearance="standard">
+        <input matInput formControlName="message" placeholder="Start typing">
+        <button
+          matSuffix
+          mat-icon-button
+          color="primary"
+          type="button"
+          (click)="send()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field>
+
+    </form>
+  </div>
+  <div class="nav-users">
+
+  </div>
+</div>

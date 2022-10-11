@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, firstValueFrom, throwError } from "rxjs";
 import { environment } from "~/src/environments/environment";
-import { IGroup, IJWTTokens, ILogin, IUser, ISignUp } from "~/src/app/types";
+import { IGroup, IJWTTokens, ILogin, IUser, ISignUp, IID } from "~/src/app/types";
 
 @Injectable( {
   providedIn: "root"
@@ -17,7 +17,7 @@ export class Api {
           'content-type': 'application/json'
         }
       } )
-        .pipe( catchError( () => throwError( () => 'Error' ) ) )
+        .pipe( catchError( ( err: HttpErrorResponse ) => throwError( () => err.message ) ) )
     );
   }
 
@@ -27,29 +27,40 @@ export class Api {
           'content-type': 'application/json'
         }
       } )
-        .pipe( catchError( () => throwError( () => 'Error' ) ) )
+        .pipe( catchError( ( err: HttpErrorResponse ) => throwError( () => err.message ) ) )
     );
   }
 
-  async isValidSession(access_token: string): Promise<IUser> {
+  async isValidSession( access_token: string ): Promise<IUser> {
     return await firstValueFrom( this.client.get<IUser>( `${ environment.api }/user/session`, {
         headers: {
-          'Authorization': `Bearer ${access_token}`,
+          'Authorization': `Bearer ${ access_token }`,
           'content-type': 'text/plain'
         }
       } )
-        .pipe( catchError( () => throwError( () => 'Error' ) ) )
+        .pipe( catchError( ( err: HttpErrorResponse ) => throwError( () => err.message ) ) )
     );
   }
 
-  async getGroups(access_token: string): Promise<IGroup[]> {
+  async getGroups( access_token: string ): Promise<IGroup[]> {
     return await firstValueFrom( this.client.get<IGroup[]>( `${ environment.api }/groups`, {
         headers: {
-          'Authorization': `Bearer ${access_token}`,
+          'Authorization': `Bearer ${ access_token }`,
           'content-type': 'text/plain'
         }
       } )
-        .pipe( catchError( () => throwError( () => 'Error' ) ) )
+        .pipe( catchError( ( err: HttpErrorResponse ) => throwError( () => err.message ) ) )
+    );
+  }
+
+  async createGroup( group: IGroup, access_token: string ): Promise<IID> {
+    return await firstValueFrom( this.client.post<IID>( `${ environment.api }/groups/create`, JSON.stringify( group ), {
+        headers: {
+          'Authorization': `Bearer ${ access_token }`,
+          'content-type': 'application/json'
+        },
+      } )
+        .pipe( catchError( ( err: HttpErrorResponse ) => throwError( () => err.message ) ) )
     );
   }
 }

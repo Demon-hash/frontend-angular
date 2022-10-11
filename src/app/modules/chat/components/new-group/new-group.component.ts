@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { NewGroupDialogComponent } from "~/src/app/modules/shared/components/new-group-dialog/new-group-dialog.component";
-import { take } from "rxjs";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NewGroupDialogComponent } from "~/src/app/modules/chat/components/new-group-dialog/new-group-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 
 @Component( {
@@ -9,23 +8,12 @@ import { MatDialog } from "@angular/material/dialog";
   styleUrls: [ './new-group.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
-export class NewGroupComponent implements OnInit {
+export class NewGroupComponent {
 
-  constructor(
-    private readonly dialog: MatDialog
-  ) {
-  }
-
-  ngOnInit(): void {
+  constructor( private readonly dialog: MatDialog ) {
   }
 
   create() {
-    const dialogRef = this.dialog.open( NewGroupDialogComponent );
-    dialogRef
-      .afterClosed()
-      .pipe( take( 1 ) )
-      .subscribe( result => {
-
-      } );
+    this.dialog.open( NewGroupDialogComponent );
   }
 }

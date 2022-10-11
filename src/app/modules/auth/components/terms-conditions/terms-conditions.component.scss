@@ -1,1 +1,5 @@
+@import "src/pallete";
 @import "../../shared/styles";
+p {
+  color: map-get($md-accent, 200);
+}

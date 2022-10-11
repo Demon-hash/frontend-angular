@@ -19,7 +19,7 @@ export class MessagesComponent implements OnDestroy {
   messages$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>( [] );
 
   form = this.formBuilder.group( {
-    message: [ '', [ Validators.required ] ],
+    message: [ '' ],
   } );
 
   constructor(
@@ -40,11 +40,14 @@ export class MessagesComponent implements OnDestroy {
   }
 
   send() {
-    if ( !this.form.invalid ) {
-      const { firstName, lastName } = this.user?.value ?? {};
-      this.socket?.sendMessage( `${ firstName } ${ lastName }: ${ this.form.controls.message.value }` );
+    if ( !this.form.invalid && this.form.controls.message.value?.trim()?.length ) {
+      this.socket?.sendMessage( `${ this.form.controls.message.value }` );
       this.form.controls.message.reset( '' );
     }
+  }
+
+  edit() {
+
   }
 
 }

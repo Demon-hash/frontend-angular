@@ -1,4 +1,5 @@
-$link-color: #000;
+@import "src/pallete";
+$link-color: map-get($md-primary, 100);
 
 form {
   position: relative;

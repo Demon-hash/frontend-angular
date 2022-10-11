@@ -1,0 +1,84 @@
+@import "../../../../../pallete";
+
+$image-width: 200px;
+$image-height: 200px;
+
+.container {
+  .preview {
+    width: $image-width;
+    height: $image-height;
+    max-width: $image-width;
+    max-height: $image-height;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  .general {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+
+    .column {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      img {
+        align-self: center;
+      }
+
+      .full-width {
+        width: 100%;
+      }
+    }
+
+    .margin-right {
+      margin-right: 5px;
+    }
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .textarea-full-width {
+    width: 100%;
+
+    textarea {
+      resize: none;
+      height: 100%;
+    }
+  }
+
+  .margin-around {
+    margin: 15px 0;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .container {
+    .general {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .column {
+        display: flex;
+
+        .preview {
+          align-self: center;
+        }
+
+        width: 100%;
+
+        .full-width {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

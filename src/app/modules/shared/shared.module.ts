@@ -10,26 +10,12 @@ import { TranslateModule } from "@ngx-translate/core";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
-import { NewGroupDialogComponent } from './components/new-group-dialog/new-group-dialog.component';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MaterialFileInputModule } from "ngx-material-file-input";
+import { MatSelectModule } from "@angular/material/select";
+import { TextareaAutosizeModule } from "ngx-textarea-autosize";
 
 @NgModule( {
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    TranslateModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatProgressSpinnerModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MaterialFileInputModule,
-    MatIconModule,
-    FormsModule
-  ],
   exports: [
     CommonModule,
     MatButtonModule,
@@ -42,11 +28,11 @@ import { MaterialFileInputModule } from "ngx-material-file-input";
     MatIconModule,
     MatDialogModule,
     MatAutocompleteModule,
+    MatSelectModule,
     FormsModule,
     TranslateModule,
-  ],
-  declarations: [
-    NewGroupDialogComponent
+    MaterialFileInputModule,
+    TextareaAutosizeModule,
   ]
 })
 export class SharedModule {

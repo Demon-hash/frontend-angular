@@ -2,11 +2,11 @@
 @include mat.core();
 @import "./pallete";
 
-$my-primary: mat.define-palette($md-primary, 500);
+$my-primary: mat.define-palette($md-primary, 200, 100, 200);
 $my-accent: mat.define-palette($md-accent, 500, 100, 600);
-$my-warn: mat.define-palette(mat.$red-palette);
+$my-warn: mat.define-palette($md-accent, 200);
 
-$theme: mat.define-light-theme((
+$theme: mat.define-dark-theme((
   color: (
     primary: $my-primary,
     accent: $my-accent,
@@ -16,5 +16,9 @@ $theme: mat.define-light-theme((
 
 @include mat.all-component-themes($theme);
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+  background-color: map-get($md-primary, 600);
+  color: map-get($md-primary, 100);
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

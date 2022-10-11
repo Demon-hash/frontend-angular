@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidatorFn, Validators } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
-import { EMAIL_PATTERN } from "~/src/app/modules/shared/consts";
+import { Store } from "@ngrx/store";
 import { FieldsMatcher } from "~/src/app/modules/shared/services/fields-mather";
+import { SessionService } from "~/src/app/services/session.service";
+import { SignUpActions } from "~/src/app/modules/auth/store/actions/sign-up.actions";
+import { EMAIL_PATTERN } from "~/src/app/modules/shared/consts";
+import { selectError, selectTokens } from "~/src/app/modules/auth/store/selectors";
 import { AppUrls } from "~/src/app/app-urls";
 import { AuthUrls } from "~/src/app/modules/auth/auth-urls";
-import { Store } from "@ngrx/store";
-import { SignUpActions } from "~/src/app/modules/auth/store/actions/sign-up.actions";
-import { selectError, selectTokens } from "~/src/app/modules/auth/store/selectors";
-import { SessionService } from "~/src/app/services/session.service";
 import { IAuthState, ISignUp } from "~/src/app/types";
 
 @Component( {
@@ -63,6 +63,8 @@ export class SignUpComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.spinner$.complete();
+    this.spinner$.unsubscribe();
+
     this.response$.unsubscribe();
     this.error$.unsubscribe();
   }

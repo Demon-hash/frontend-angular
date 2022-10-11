@@ -1,7 +1,12 @@
 {
   "group": {
+    "header": "Groups",
     "create": {
-      "title": "Creating A New Group"
+      "header": "Creating A New Group",
+      "title": "Title",
+      "desc": "Description (optional)",
+      "category": "Select a category",
+      "private": "Private"
     }
   },
   "login": {

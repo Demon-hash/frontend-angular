@@ -1,4 +1,4 @@
-<mat-spinner color="accent" class="spinner" *ngIf="(groups$ | async)?.length == 0"></mat-spinner>
+<mat-spinner color="accent" class="spinner" *ngIf="(loading$ | async)"></mat-spinner>
 <div class="container">
   <div *ngFor="let g of (groups$ | async)" class="group" (click)="connect(g.id)">
     <div class="image">

@@ -3,12 +3,12 @@ import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { Store } from "@ngrx/store";
+import { SessionService } from "~/src/app/services/session.service";
 import { LoginActions } from "~/src/app/modules/auth/store/actions/login.actions";
 import { EMAIL_PATTERN } from "~/src/app/modules/shared/consts";
+import { selectError, selectTokens } from "~/src/app/modules/auth/store/selectors";
 import { AppUrls } from "~/src/app/app-urls";
 import { AuthUrls } from "~/src/app/modules/auth/auth-urls";
-import { selectError, selectTokens } from "~/src/app/modules/auth/store/selectors";
-import { SessionService } from "~/src/app/services/session.service";
 import { IAuthState, ILogin } from "~/src/app/types";
 
 @Component( {

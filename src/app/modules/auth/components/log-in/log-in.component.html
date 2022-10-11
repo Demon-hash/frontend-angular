@@ -4,14 +4,14 @@
 >
   <mat-spinner *ngIf="(spinner$ | async)" class="spinner"></mat-spinner>
 
-  <mat-form-field class="full-width">
+  <mat-form-field class="full-width" color="primary">
     <mat-label>{{ 'field.email' | translate }}</mat-label>
     <input matInput formControlName="email">
     <mat-error *ngIf="form.controls.email.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
     <mat-error *ngIf="form.controls.email.hasError('pattern')">{{ 'error.field.email' | translate }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width">
+  <mat-form-field class="full-width"  color="primary">
     <mat-label>{{ 'field.password' | translate }}</mat-label>
     <input matInput formControlName="password">
     <mat-error *ngIf="form.controls.password.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
@@ -24,8 +24,8 @@
   </div>
 
   <button
-    class="full-width"
     mat-raised-button
+    class="full-width"
     color="primary"
     type="button"
     [disabled]="(form.invalid) || (spinner$ | async)"

@@ -18,6 +18,7 @@ export interface IResetCode {
 }
 
 export type IResetPassword = IResetCode & Pick<ILogin, "email">;
+export type IID = { id: string };
 
 export interface IAuthState {
   auth: {
@@ -33,6 +34,7 @@ export interface IAuthState {
 export interface IChatState {
   chat: {
     user: IUser;
+    group: IID;
     error: string;
   }
 }
@@ -43,9 +45,10 @@ export interface IJWTTokens {
 }
 
 export interface IGroup {
-  id: string;
+  id?: string;
   title: string;
   ico: string;
+  hidden?: boolean;
 }
 
 export interface IUser {

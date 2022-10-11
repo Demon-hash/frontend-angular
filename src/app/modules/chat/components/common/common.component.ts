@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component( {
   selector: 'app-chat-common',
@@ -6,10 +6,5 @@ import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
   styleUrls: [ './common.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
-export class CommonComponent implements OnDestroy {
-  constructor() {
-  }
-
-  ngOnDestroy(): void {
-  }
+export class CommonComponent {
 }

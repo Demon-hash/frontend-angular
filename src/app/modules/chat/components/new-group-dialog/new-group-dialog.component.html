@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>{{ 'group.create.header' | translate }}</h2>
+<mat-dialog-content class="mat-typography container">
+  <form
+    [formGroup]="form"
+    novalidate
+  >
+    <input
+      #fileInput
+      hidden
+      (change)="onChange($event)"
+      type="file"
+      accept="image/png,image/jpg,image/jpeg"
+      formControlName="ico"
+    >
+
+    <div class="general">
+      <div class="column">
+        <img
+          [src]="url.length > 0 ? url : '/assets/images/200x200.png'"
+          alt="*"
+          (click)="fileInput.click()"
+          draggable="false"
+          class="preview"
+        >
+        <section>
+          <mat-checkbox color="primary" formControlName="hidden">{{ 'group.create.private' | translate }}</mat-checkbox>
+        </section>
+      </div>
+      <div class="column margin-right">
+        <mat-form-field class="full-width">
+          <mat-label>{{ 'group.create.title' | translate }}</mat-label>
+          <input matInput formControlName="title">
+          <mat-error
+            *ngIf="form.controls.title.hasError('required')">{{ 'error.field.required' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="textarea-full-width">
+          <mat-label>{{ 'group.create.desc' | translate }}</mat-label>
+          <textarea matInput cols="300" rows="7" formControlName="desc"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <p class="full-width margin-around">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </p>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    mat-dialog-close
+  >
+    {{ 'btn.back' | translate }}
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="create()"
+    [disabled]="form.invalid"
+  >
+    {{ 'btn.create' | translate }}
+  </button>
+</mat-dialog-actions>
