@@ -2,10 +2,9 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { catchError, from, map, of, switchMap } from "rxjs";
 import { Store } from "@ngrx/store";
-import { AuthState } from "~/src/app/modules/auth/store";
 import { Api } from "~/src/app/api";
 import { SignUpActions } from "~/src/app/modules/auth/store/actions/sign-up.actions";
-import { JWTTokens } from "~/src/app/types";
+import { IAuthState, IJWTTokens } from "~/src/app/types";
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +12,7 @@ import { JWTTokens } from "~/src/app/types";
 export class SignUpEffects {
   constructor(
     private readonly actions$: Actions,
-    private readonly store$: Store<AuthState>,
+    private readonly store$: Store<IAuthState>,
     private readonly api$: Api
   ) {
   }
@@ -22,9 +21,9 @@ export class SignUpEffects {
   request$ = this.actions$
     .pipe(
       ofType(SignUpActions.request),
-      switchMap(props => from(this.api$.create(props))
+      switchMap(props => from(this.api$.signup(props))
         .pipe(
-          map((tokens) => SignUpActions.success(tokens as JWTTokens)),
+          map((tokens) => SignUpActions.success(tokens as IJWTTokens)),
           catchError(err => of(SignUpActions.error({ error: err })))
         )
       ));

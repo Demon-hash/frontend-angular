@@ -1,6 +1,8 @@
 {
-  "chat": {
-    "joined": "{{ credits }} has just joined the chat!"
+  "group": {
+    "create": {
+      "title": "Creating A New Group"
+    }
   },
   "login": {
     "question": {
@@ -23,7 +25,8 @@
     "login": "Login",
     "sign-up": "Sign Up",
     "reset-password": "Reset password",
-    "back": "Back"
+    "back": "Back",
+    "create": "Create"
   },
   "field": {
     "name": "First name",

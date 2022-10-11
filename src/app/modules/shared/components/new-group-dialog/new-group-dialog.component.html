@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>{{ 'group.create.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography container">
+  <form
+    [formGroup]="form"
+    novalidate
+  >
+    <input
+      #fileInput
+      hidden
+      (change)="onChange($event)"
+      type="file"
+      accept="image/png,image/jpg,image/jpeg"
+      formControlName="logo"
+    >
+
+    <div class="general">
+      <div class="column">
+        <img
+          [src]="url.length > 0 ? url : '/assets/images/200x200.png'"
+          alt="*"
+          (click)="fileInput.click()"
+          class="preview"
+        >
+        <section>
+          <mat-checkbox formControlName="private">Private</mat-checkbox>
+        </section>
+      </div>
+      <div class="info">
+        <mat-form-field class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput required formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="textarea-full-width">
+          <mat-label>Description (optional)</mat-label>
+          <textarea matInput cols="300" rows="4" formControlName="desc"></textarea>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Subject</mat-label>
+          <input type="text" required matInput [formControl]="myControl" [matAutocomplete]="auto" formControlName="subject">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{ 'btn.back' | translate }}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" [disabled]="form.invalid">{{ 'btn.create' | translate }}</button>
+</mat-dialog-actions>

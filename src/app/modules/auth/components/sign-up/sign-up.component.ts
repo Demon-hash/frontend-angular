@@ -6,10 +6,10 @@ import { FieldsMatcher } from "~/src/app/modules/shared/services/fields-mather";
 import { AppUrls } from "~/src/app/app-urls";
 import { AuthUrls } from "~/src/app/modules/auth/auth-urls";
 import { Store } from "@ngrx/store";
-import { AuthState, SignUpInterface } from "~/src/app/modules/auth/store";
 import { SignUpActions } from "~/src/app/modules/auth/store/actions/sign-up.actions";
 import { selectError, selectTokens } from "~/src/app/modules/auth/store/selectors";
 import { SessionService } from "~/src/app/services/session.service";
+import { IAuthState, ISignUp } from "~/src/app/types";
 
 @Component( {
   selector: 'app-sign-up',
@@ -48,7 +48,7 @@ export class SignUpComponent implements OnDestroy {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly store$: Store<AuthState>,
+    private readonly store$: Store<IAuthState>,
     private readonly session: SessionService
   ) {
     this.form.setValidators( this.validateFields( 'password', 'confirm' ) );
@@ -69,7 +69,7 @@ export class SignUpComponent implements OnDestroy {
 
   onSubmit() {
     if ( !this.form.invalid ) {
-      this.store$.dispatch( SignUpActions.request( this.form.getRawValue() as SignUpInterface ) );
+      this.store$.dispatch( SignUpActions.request( this.form.getRawValue() as ISignUp ) );
       this?.spinner$?.next( true );
     }
   }

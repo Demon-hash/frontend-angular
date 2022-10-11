@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { catchError, firstValueFrom, throwError } from "rxjs";
 import { environment } from "~/src/environments/environment";
-import { LoginInterface, SignUpInterface } from "~/src/app/modules/auth/store";
-import { JWTTokens } from "~/src/app/types";
+import { IGroup, IJWTTokens, ILogin, IUser, ISignUp } from "~/src/app/types";
 
 @Injectable( {
   providedIn: "root"
@@ -12,8 +11,8 @@ export class Api {
   constructor( private readonly client: HttpClient ) {
   }
 
-  async create( data: SignUpInterface ): Promise<JWTTokens | string> {
-    return await firstValueFrom( this.client.post<JWTTokens>( `${ environment.api }/user/create`, JSON.stringify( data ), {
+  async signup( data: ISignUp ): Promise<IJWTTokens | string> {
+    return await firstValueFrom( this.client.post<IJWTTokens>( `${ environment.api }/user/create`, JSON.stringify( data ), {
         headers: {
           'content-type': 'application/json'
         }
@@ -22,8 +21,8 @@ export class Api {
     );
   }
 
-  async login( data: LoginInterface ): Promise<JWTTokens | string> {
-    return await firstValueFrom( this.client.post<JWTTokens>( `${ environment.api }/user/login`, JSON.stringify( data ), {
+  async login( data: ILogin ): Promise<IJWTTokens | string> {
+    return await firstValueFrom( this.client.post<IJWTTokens>( `${ environment.api }/user/login`, JSON.stringify( data ), {
         headers: {
           'content-type': 'application/json'
         }
@@ -32,8 +31,19 @@ export class Api {
     );
   }
 
-  async isValidSession(access_token: string): Promise<SignUpInterface> {
-    return await firstValueFrom( this.client.get<SignUpInterface>( `${ environment.api }/user/session`, {
+  async isValidSession(access_token: string): Promise<IUser> {
+    return await firstValueFrom( this.client.get<IUser>( `${ environment.api }/user/session`, {
+        headers: {
+          'Authorization': `Bearer ${access_token}`,
+          'content-type': 'text/plain'
+        }
+      } )
+        .pipe( catchError( () => throwError( () => 'Error' ) ) )
+    );
+  }
+
+  async getGroups(access_token: string): Promise<IGroup[]> {
+    return await firstValueFrom( this.client.get<IGroup[]>( `${ environment.api }/groups`, {
         headers: {
           'Authorization': `Bearer ${access_token}`,
           'content-type': 'text/plain'

@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
+import { BehaviorSubject } from "rxjs";
 import { Store } from "@ngrx/store";
-import { AuthState, LoginInterface } from "~/src/app/modules/auth/store";
 import { LoginActions } from "~/src/app/modules/auth/store/actions/login.actions";
 import { EMAIL_PATTERN } from "~/src/app/modules/shared/consts";
 import { AppUrls } from "~/src/app/app-urls";
 import { AuthUrls } from "~/src/app/modules/auth/auth-urls";
-import { BehaviorSubject } from "rxjs";
 import { selectError, selectTokens } from "~/src/app/modules/auth/store/selectors";
 import { SessionService } from "~/src/app/services/session.service";
+import { IAuthState, ILogin } from "~/src/app/types";
 
 @Component( {
   selector: 'app-log-in',
@@ -40,7 +40,7 @@ export class LogInComponent implements OnDestroy {
     } );
 
   constructor(
-    private readonly store$: Store<AuthState>,
+    private readonly store$: Store<IAuthState>,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly session: SessionService
@@ -59,7 +59,7 @@ export class LogInComponent implements OnDestroy {
 
   onSubmit() {
     if ( !this.form.invalid ) {
-      this.store$.dispatch( LoginActions.request( this.form.getRawValue() as LoginInterface ) );
+      this.store$.dispatch( LoginActions.request( this.form.getRawValue() as ILogin ) );
       this.spinner$.next( true );
     }
   }
