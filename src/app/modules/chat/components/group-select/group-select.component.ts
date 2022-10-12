@@ -7,6 +7,7 @@ import { AppUrls } from "~/src/app/app-urls";
 import { ChatUrls } from "~/src/app/modules/chat/chat-urls";
 import { NewGroupSelectors } from "~/src/app/modules/chat/store/selectors/new-group.selectors";
 import { Store } from "@ngrx/store";
+import { ChatUserSelectors } from "~/src/app/modules/chat/store/selectors/chat-user.selectors";
 
 @Component( {
   selector: 'app-group-select',
@@ -16,11 +17,12 @@ import { Store } from "@ngrx/store";
 } )
 export class GroupSelectComponent implements OnDestroy {
 
-  groups$: BehaviorSubject<IGroup[]> = new BehaviorSubject<IGroup[]>( [] );
-  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>( true );
-  handler$ = this.store.select(NewGroupSelectors.selectNewGroupId).subscribe(id => {
+  readonly groups$: BehaviorSubject<IGroup[]> = new BehaviorSubject<IGroup[]>( [] );
+  readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>( true );
+  readonly handler$ = this.store.select(NewGroupSelectors.selectNewGroupId).subscribe(id => {
     this.connect(id);
   });
+  readonly user$ = this.store.select(ChatUserSelectors.selectUser);
 
   constructor(
     private readonly router: Router,

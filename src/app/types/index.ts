@@ -46,12 +46,14 @@ export interface IJWTTokens {
 
 export interface IGroup {
   id?: string;
+  ownerId: string;
   title: string;
   ico: string;
   hidden?: boolean;
 }
 
 export interface IUser {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;

@@ -19,9 +19,10 @@ export const chatReducer = createReducer(
   on(
     ChatUserActions.request,
     ChatUserActions.success,
-    ( state, { firstName, lastName, email } ) => ({
+    ( state, { firstName, lastName, email, id } ) => ({
       ...state,
       user: {
+        id: id,
         firstName: firstName,
         lastName: lastName,
         email: email

@@ -12,6 +12,7 @@ import { IUser, IUserWithGroupId } from "~/src/app/types";
 export class ConversationComponent implements OnDestroy {
 
   readonly $user: BehaviorSubject<IUser> = new BehaviorSubject<IUser>({
+    id: "",
     firstName: "",
     lastName: "",
     email: ""

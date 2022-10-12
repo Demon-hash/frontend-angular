@@ -6,7 +6,8 @@
       "title": "Title",
       "desc": "Description (optional)",
       "category": "Select a category",
-      "private": "Private"
+      "private": "Private",
+      "logo-upload-error": "Image should be 256x256 (2 MB)"
     }
   },
   "login": {
@@ -31,7 +32,8 @@
     "sign-up": "Sign Up",
     "reset-password": "Reset password",
     "back": "Back",
-    "create": "Create"
+    "create": "Create",
+    "close": "Close"
   },
   "field": {
     "name": "First name",

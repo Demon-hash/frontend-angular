@@ -5,7 +5,10 @@
       <img src="{{ g.ico }}" alt="*" draggable="false"/>
     </div>
     <div class="info">
-      <span class="mat-body-2">{{ g.title }}</span>
+      <span class="mat-body-2">{{ g.title }}
+        <mat-icon  *ngIf="g.hidden">https</mat-icon>
+        <mat-icon  *ngIf="g.ownerId == (user$ | async)?.id">handyman</mat-icon>
+      </span>
       <p>Some random text</p>
     </div>
   </div>

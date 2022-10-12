@@ -14,6 +14,28 @@
           </span>
           <textarea autosize class="message-raw mat-body-1" readonly>{{ i }}</textarea>
         </div>
+        <div class="message-actions">
+          <button
+            type="button"
+            color="primary"
+            mat-icon-button
+          >
+            <mat-icon>reply</mat-icon>
+          </button>
+          <button
+            type="button"
+            color="primary"
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item><mat-icon>edit</mat-icon> Edit</button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item><mat-icon>delete</mat-icon> Delete</button>
+          </mat-menu>
+        </div>
       </div>
     </div>
     <form
@@ -21,7 +43,31 @@
       novalidate
     >
       <mat-form-field class="full-width" appearance="standard">
-        <input matInput formControlName="message" placeholder="Start typing">
+        <textarea autosize matInput formControlName="message" placeholder="Start typing"></textarea>
+        <button
+          matSuffix
+          mat-icon-button
+          color="primary"
+          type="button"
+        >
+          <mat-icon>tag_faces</mat-icon>
+        </button>
+        <button
+          matSuffix
+          mat-icon-button
+          color="primary"
+          type="button"
+        >
+          <mat-icon>mic</mat-icon>
+        </button>
+        <button
+          matSuffix
+          mat-icon-button
+          color="primary"
+          type="button"
+        >
+          <mat-icon>attach_file</mat-icon>
+        </button>
         <button
           matSuffix
           mat-icon-button
@@ -31,7 +77,6 @@
           <mat-icon>send</mat-icon>
         </button>
       </mat-form-field>
-
     </form>
   </div>
   <div class="nav-users">

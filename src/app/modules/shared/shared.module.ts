@@ -14,6 +14,9 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 import { MatSelectModule } from "@angular/material/select";
 import { TextareaAutosizeModule } from "ngx-textarea-autosize";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule( {
   exports: [
@@ -32,6 +35,9 @@ import { TextareaAutosizeModule } from "ngx-textarea-autosize";
     FormsModule,
     TranslateModule,
     MaterialFileInputModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatDividerModule,
     TextareaAutosizeModule,
   ]
 })
