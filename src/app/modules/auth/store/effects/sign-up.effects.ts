@@ -6,9 +6,9 @@ import { Api } from "~/src/app/api";
 import { SignUpActions } from "~/src/app/modules/auth/store/actions/sign-up.actions";
 import { IAuthState, IJWTTokens } from "~/src/app/types";
 
-@Injectable({
+@Injectable( {
   providedIn: "root"
-})
+} )
 export class SignUpEffects {
   constructor(
     private readonly actions$: Actions,
@@ -20,13 +20,17 @@ export class SignUpEffects {
   @Effect()
   request$ = this.actions$
     .pipe(
-      ofType(SignUpActions.request),
-      switchMap(props => from(this.api$.signup(props))
+      ofType( SignUpActions.request ),
+      switchMap( props => from( this.api$.signup( props ) )
         .pipe(
-          map((tokens) => SignUpActions.success(tokens as IJWTTokens)),
-          catchError(err => of(SignUpActions.error({ error: err })))
+          map( ( tokens ) => {
+            return tokens == null ?
+              SignUpActions.error( { error: `Error while creating an user` } )
+              : SignUpActions.success( tokens as IJWTTokens );
+          } ),
+          catchError( err => of( SignUpActions.error( { error: err } ) ) )
         )
-      ));
+      ) );
 
   @Effect( {
     dispatch: false

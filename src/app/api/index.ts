@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError, firstValueFrom, throwError } from "rxjs";
+import { catchError, firstValueFrom, tap, throwError } from "rxjs";
 import { environment } from "~/src/environments/environment";
 import { IGroup, IJWTTokens, ILogin, IUser, ISignUp, IID } from "~/src/app/types";
 
@@ -11,13 +11,15 @@ export class Api {
   constructor( private readonly client: HttpClient ) {
   }
 
-  async signup( data: ISignUp ): Promise<IJWTTokens | string> {
+  async signup( data: ISignUp ): Promise<IJWTTokens | null> {
     return await firstValueFrom( this.client.post<IJWTTokens>( `${ environment.api }/user/create`, JSON.stringify( data ), {
         headers: {
           'content-type': 'application/json'
         }
       } )
-        .pipe( catchError( ( err: HttpErrorResponse ) => throwError( () => err.message ) ) )
+        .pipe(
+          catchError( ( err: HttpErrorResponse ) => throwError( () => err.message ) )
+        )
     );
   }
 
